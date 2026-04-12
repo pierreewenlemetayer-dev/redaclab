@@ -1,155 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redac Lab</title>
+<title>Redac Lab</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+body {font-family: Arial; background:#f4f6f8; padding:20px;}
+.layout {display:flex; gap:20px; align-items:flex-start;}
+.sidebar {width:250px;}
+.main {flex:1;}
+.top-row {display:flex; gap:20px;}
+.card {background:white; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-bottom:20px;}
 
-        h1 {
-            text-align: center;
-        }
+textarea {
+width:100%;
+min-height:320px;
+font-family: Verdana;
+font-size:16px;
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
 
-        .layout {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
+.ligne {display:flex; gap:10px; align-items:center; margin-bottom:10px;}
 
-        .sidebar {
-            width: 250px;
-        }
+.rep {background:#ffe066;}
+.verbe {background:#74c0fc;}
 
-        .main {
-            flex: 1;
-        }
+#texteColorie {
+white-space:pre-wrap;
+border:1px solid #ccc;
+padding:15px;
+border-radius:8px;
+background:#fafafa;
+min-height:300px;
+}
 
-        .top-row {
-            display: flex;
-            gap: 20px;
-            align-items: stretch;
-        }
+.bas {
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+align-items:center;
+font-size:14px;
+}
 
-        .text-block {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stats-block {
-            flex: 1;
-        }
-
-        .card {
-            background: white;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        textarea {
-            width: 100%;
-            height: 100%;
-            min-height: 320px;
-            padding: 10px;
-            font-size: 16px;
-            font-family: Verdana, sans-serif;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            resize: vertical;
-        }
-
-        input {
-            width: 80px;
-            margin-left: 10px;
-        }
-
-        .ligne-eleve {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .ligne-eleve input {
-            width: 120px;
-        }
-
-        button {
-            padding: 5px 10px;
-            border-radius: 6px;
-            border: none;
-            background-color: #1971c2;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #125a9c;
-        }
-
-        a {
-            text-decoration: none;
-            color: #1971c2;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .rep {
-            background-color: #ffe066;
-            font-weight: bold;
-        }
-
-        .verbe {
-            background-color: #74c0fc;
-            font-weight: bold;
-        }
-
-        #texteColorie {
-            white-space: pre-wrap;
-            border: 1px solid #ccc;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #fafafa;
-            min-height: 300px;
-            font-size: 15px;
-            line-height: 1.5;
-            width: 100%;
-        }
-
-        .legend span {
-            display: inline-block;
-            margin-right: 15px;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        .legend .rep {
-            background-color: #ffe066;
-        }
-
-        .legend .verbe {
-            background-color: #74c0fc;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
-
+footer {text-align:center; margin-top:30px; color:#666;}
+</style>
 </head>
 
 <body>
@@ -158,171 +53,182 @@
 
 <div class="layout">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
+<!-- GAUCHE -->
+<div class="sidebar">
 
-        <div class="card">
-            <h2>🎯 Objectifs</h2>
-            <p>Mots min : <input type="number" id="objMots" value="300"></p>
-            <p>Densité (%) : <input type="number" id="objDensite" value="55"></p>
-            <p>Moyenne max : <input type="number" id="objMoyenne" value="21"></p>
-        </div>
+<div class="card">
+<h2>🎯 Objectifs</h2>
+<p>Mots min : <input id="objMots" type="number" value="300"></p>
+<p>Densité (%) : <input id="objDensite" type="number" value="55"></p>
+<p>Moyenne max : <input id="objMoyenne" type="number" value="21"></p>
+</div>
 
-        <div class="card">
-            <h2>🔗 Outils utiles</h2>
-            <p><a href="https://www.synonymo.fr/" target="_blank">Synonymes</a></p>
-            <p><a href="https://www.scribens.fr/" target="_blank">Orthographe</a></p>
-        </div>
-
-    </div>
-
-    <!-- MAIN -->
-    <div class="main">
-
-        <div class="top-row">
-
-            <div class="card text-block">
-
-                <!-- BARRE ÉLÈVE -->
-                <div class="ligne-eleve">
-                    <strong>👤 Élève :</strong>
-                    <input id="nom" placeholder="Nom">
-                    <button onclick="sauvegarder()">💾 Sauvegarder</button>
-                    <button onclick="charger()">📂 Charger</button>
-                </div>
-
-                <textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
-
-            </div>
-
-            <div class="card stats-block">
-                <h2>📊 Statistiques</h2>
-
-                <p>Mots : <span id="mots">0</span> <span id="motsCouleur">🔴</span></p>
-                <p>Moyenne mots / phrase : <span id="moyenne">0</span> <span id="moyenneCouleur">🔴</span></p>
-                <p>Densité lexicale : <span id="densite">0</span> % <span id="densiteCouleur">🔴</span></p>
-                <p>Paragraphes : <span id="paragraphes">0</span></p>
-                <p>Phrases : <span id="phrases">0</span></p>
-                <p>Phrase la plus longue : <span id="longue">0</span></p>
-                <p>Verbes ternes : <span id="verbes">0</span></p>
-                <p>Répétitions : <span id="repetitions">0</span></p>
-            </div>
-
-        </div>
-
-        <div class="card">
-            <h2>🔍 Texte analysé</h2>
-
-            <div class="legend">
-                <span class="rep">Répétitions</span>
-                <span class="verbe">Verbes ternes</span>
-            </div>
-
-            <div id="texteColorie"></div>
-        </div>
-
-    </div>
+<div class="card">
+<h2>🔗 Outils</h2>
+<p><a href="https://www.synonymo.fr/" target="_blank">Synonymes</a></p>
+<p><a href="https://www.scribens.fr/" target="_blank">Orthographe</a></p>
+</div>
 
 </div>
 
-<footer>
-    © Redac Lab – Pierre Lemétayer – 2026
-</footer>
+<!-- CENTRE -->
+<div class="main">
+
+<div class="top-row">
+
+<div class="card" style="flex:2">
+
+<div class="ligne">
+👤 <input id="nom" placeholder="Nom">
+</div>
+
+<textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
+
+</div>
+
+<div class="card" style="flex:1">
+<h2>📊 Statistiques</h2>
+<p>Mots : <span id="mots">0</span></p>
+<p>Phrases : <span id="phrases">0</span></p>
+<p>Moyenne mots / phrase : <span id="moyenne">0</span></p>
+<p>Densité lexicale : <span id="densite">0</span>%</p>
+</div>
+
+</div>
+
+<div class="card">
+<h2>🔍 Texte analysé</h2>
+<div id="texteColorie"></div>
+</div>
+
+<!-- BAS -->
+<div class="card bas">
+
+<button onclick="ajouterTexte()">💾 Ajouter</button>
+<button onclick="modifierTexte()">✏️ Modifier</button>
+
+<span id="listeInline"></span>
+
+<span id="progression"></span>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>© Redac Lab – Pierre Lemétayer – 2026</footer>
 
 <script>
+
+let indexCourant = null;
+
 const textarea = document.getElementById("texte");
 
 textarea.addEventListener("input", analyser);
-document.querySelectorAll("input").forEach(input => {
-    input.addEventListener("input", analyser);
+document.getElementById("nom").addEventListener("input", afficherTout);
+
+function analyser(){
+let texte = textarea.value.toLowerCase();
+
+let mots = texte.trim().split(/\s+/).filter(m=>m);
+let nbMots = mots.length;
+
+let phrases = texte.split(/[.!?]+/).filter(p=>p.trim());
+let nbPhrases = phrases.length;
+
+let moyenne = nbPhrases ? nbMots/nbPhrases : 0;
+
+let uniques = new Set(mots);
+let densite = nbMots ? (uniques.size/nbMots)*100 : 0;
+
+document.getElementById("mots").textContent = nbMots;
+document.getElementById("phrases").textContent = nbPhrases;
+document.getElementById("moyenne").textContent = moyenne.toFixed(1);
+document.getElementById("densite").textContent = densite.toFixed(1);
+
+document.getElementById("texteColorie").innerText = textarea.value;
+}
+
+function ajouterTexte(){
+let nom = document.getElementById("nom").value;
+if(nom===""){ alert("Entre ton nom"); return; }
+
+let data = chargerData(nom);
+
+data.push({
+contenu: textarea.value,
+mots: compterMots()
 });
 
-function analyser() {
-    const texteOriginal = textarea.value;
-    const texte = texteOriginal.toLowerCase();
-
-    const mots = texte.trim().split(/\s+/).filter(m => m.length > 0);
-    const nbMots = mots.length;
-
-    const phrases = texte.split(/[.!?]+/).filter(p => p.trim().length > 0);
-    const nbPhrases = phrases.length;
-
-    const moyenne = nbPhrases > 0 ? (nbMots / nbPhrases) : 0;
-
-    const motsUniques = new Set(mots);
-    const densite = nbMots > 0 ? ((motsUniques.size / nbMots) * 100) : 0;
-
-    let maxLongueur = 0;
-    phrases.forEach(p => {
-        const l = p.trim().split(/\s+/).filter(m => m).length;
-        if (l > maxLongueur) maxLongueur = l;
-    });
-
-    const nbParagraphes = texte.split(/\n+/).filter(p => p.trim()).length;
-
-    const verbes = ["suis","es","est","sommes","etes","sont","étais","était","étions","étiez","étaient","serai","seras","sera","serons","serez","seront","fus","fut","fûmes","fûtes","furent",
-                    "ai","as","a","avons","avez","ont","avais","avait","avions","aviez","avaient","aurai","auras","aura","aurons","aurez","auront","eus","eut","eûmes","eûtes","eurent",
-                    "fais","fait","faisons","faites","font","faisais","faisait","faisions","faisiez","faisaient","ferai","feras","fera","ferons","ferez","feront","fis","fit","fîmes","fîtes","firent",
-                    "dis","dit","disons","dites","disent","disais","disait","disions","disiez","disaient","dirai","diras","dira","dirons","direz","diront","dîmes","dîtes","dirent"];
-
-    let nbVerbes = 0, motsVerbes = [];
-    mots.forEach(m => { if (verbes.includes(m)) { nbVerbes++; motsVerbes.push(m);} });
-
-    const compteur = {};
-    mots.forEach(m => { if (m.length > 3) compteur[m] = (compteur[m]||0)+1; });
-
-    let nbRep = 0, motsRep = [];
-    for (let m in compteur) if (compteur[m]>1){ nbRep++; motsRep.push(m); }
-
-    let html = textarea.value;
-
-    motsRep.forEach(m => {
-        html = html.replace(new RegExp("\\b"+m+"\\b","gi"), '<span class="rep">'+m+'</span>');
-    });
-
-    motsVerbes.forEach(m => {
-        html = html.replace(new RegExp("\\b"+m+"\\b","gi"), '<span class="verbe">'+m+'</span>');
-    });
-
-    document.getElementById("texteColorie").innerHTML = html;
-
-    function c(v,o,t="min"){return t=="min"?(v>=o?"🟢":v>=o*0.8?"🟠":"🔴"):(v<=o?"🟢":v<=o*1.2?"🟠":"🔴");}
-
-    document.getElementById("mots").textContent = nbMots;
-    document.getElementById("phrases").textContent = nbPhrases;
-    document.getElementById("moyenne").textContent = moyenne.toFixed(1);
-    document.getElementById("densite").textContent = densite.toFixed(1);
-    document.getElementById("longue").textContent = maxLongueur;
-    document.getElementById("paragraphes").textContent = nbParagraphes;
-    document.getElementById("verbes").textContent = nbVerbes;
-    document.getElementById("repetitions").textContent = nbRep;
-
-    document.getElementById("motsCouleur").textContent = c(nbMots,objMots.value,"min");
-    document.getElementById("densiteCouleur").textContent = c(densite,objDensite.value,"min");
-    document.getElementById("moyenneCouleur").textContent = c(moyenne,objMoyenne.value,"max");
+sauverData(nom,data);
+resetForm();
+afficherTout();
 }
 
-function sauvegarder(){
-    let nom=document.getElementById("nom").value;
-    let texte=document.getElementById("texte").value;
+function modifierTexte(){
+let nom = document.getElementById("nom").value;
+if(indexCourant===null){ alert("Choisis un texte"); return; }
 
-    if(nom===""){alert("Entre ton nom"); return;}
+let data = chargerData(nom);
 
-    localStorage.setItem("redac_"+nom, texte);
-    alert("Texte sauvegardé !");
+data[indexCourant] = {
+contenu: textarea.value,
+mots: compterMots()
+};
+
+sauverData(nom,data);
+resetForm();
+afficherTout();
 }
 
-function charger(){
-    let nom=document.getElementById("nom").value;
-    let texte=localStorage.getItem("redac_"+nom);
+function chargerTexte(i){
+let nom = document.getElementById("nom").value;
+let data = chargerData(nom);
 
-    if(texte){
-        document.getElementById("texte").value=texte;
-        analyser();
-    }else{
-        alert("Aucun texte trouvé");
-    }
+textarea.value = data[i].contenu;
+indexCourant = i;
+analyser();
 }
+
+function chargerData(nom){
+return JSON.parse(localStorage.getItem("redac_"+nom)) || [];
+}
+
+function sauverData(nom,data){
+localStorage.setItem("redac_"+nom, JSON.stringify(data));
+}
+
+function compterMots(){
+return textarea.value.trim().split(/\s+/).filter(m=>m).length;
+}
+
+function afficherTout(){
+let nom = document.getElementById("nom").value;
+let data = chargerData(nom);
+
+let liste="";
+data.forEach((t,i)=>{
+liste+=`<button onclick="chargerTexte(${i})">${i+1}</button> `;
+});
+document.getElementById("listeInline").innerHTML=liste;
+
+if(data.length>=2){
+let debut=data[0].mots;
+let fin=data[data.length-1].mots;
+let diff=fin-debut;
+document.getElementById("progression").innerHTML=
+`📈 ${debut} → ${fin} (${diff>=0?"+":""}${diff})`;
+}else{
+document.getElementById("progression").innerHTML="";
+}
+}
+
+function resetForm(){
+indexCourant=null;
+textarea.value="";
+}
+
 </script>
 
 </body>
