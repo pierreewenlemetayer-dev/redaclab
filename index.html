@@ -1,155 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redac Lab</title>
+<title>Redac Lab</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+body {font-family: Arial; background:#f4f6f8; padding:20px;}
+.layout {display:flex; gap:20px;}
+.sidebar {width:250px;}
+.main {flex:1;}
+.top-row {display:flex; gap:20px;}
+.card {background:white; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-bottom:20px;}
 
-        h1 {
-            text-align: center;
-        }
+.text-block {flex:2; display:flex; flex-direction:column;}
+.stats-block {flex:1;}
 
-        .layout {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
+textarea {
+width:100%;
+min-height:320px;
+font-family: Verdana;
+font-size:16px;
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
 
-        .sidebar {
-            width: 250px;
-        }
+.ligne-eleve, .ligne-texte {
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:wrap;
+margin-bottom:10px;
+}
 
-        .main {
-            flex: 1;
-        }
+input {padding:5px;}
 
-        .top-row {
-            display: flex;
-            gap: 20px;
-            align-items: stretch;
-        }
+button {
+padding:5px 10px;
+border:none;
+border-radius:6px;
+background:#1971c2;
+color:white;
+cursor:pointer;
+}
 
-        .text-block {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-        }
+button:hover {background:#125a9c;}
 
-        .stats-block {
-            flex: 1;
-        }
+#texteColorie {
+border:1px solid #ccc;
+padding:10px;
+background:#fafafa;
+min-height:300px;
+white-space:pre-wrap;
+}
 
-        .card {
-            background: white;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        textarea {
-            width: 100%;
-            height: 100%;
-            min-height: 320px;
-            padding: 10px;
-            font-size: 16px;
-            font-family: Verdana, sans-serif;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            resize: vertical;
-        }
-
-        input {
-            width: 80px;
-            margin-left: 10px;
-        }
-
-        .ligne-eleve {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .ligne-eleve input {
-            width: 120px;
-        }
-
-        button {
-            padding: 5px 10px;
-            border-radius: 6px;
-            border: none;
-            background-color: #1971c2;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #125a9c;
-        }
-
-        a {
-            text-decoration: none;
-            color: #1971c2;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .rep {
-            background-color: #ffe066;
-            font-weight: bold;
-        }
-
-        .verbe {
-            background-color: #74c0fc;
-            font-weight: bold;
-        }
-
-        #texteColorie {
-            white-space: pre-wrap;
-            border: 1px solid #ccc;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #fafafa;
-            min-height: 300px;
-            font-size: 15px;
-            line-height: 1.5;
-            width: 100%;
-        }
-
-        .legend span {
-            display: inline-block;
-            margin-right: 15px;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        .legend .rep {
-            background-color: #ffe066;
-        }
-
-        .legend .verbe {
-            background-color: #74c0fc;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
-
+footer {text-align:center; margin-top:30px; color:#666;}
+</style>
 </head>
 
 <body>
@@ -158,171 +63,162 @@
 
 <div class="layout">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
+<div class="sidebar">
+<div class="card">
+<h2>🎯 Objectifs</h2>
+<p>Mots min : <input type="number" id="objMots" value="300"></p>
+</div>
+</div>
 
-        <div class="card">
-            <h2>🎯 Objectifs</h2>
-            <p>Mots min : <input type="number" id="objMots" value="300"></p>
-            <p>Densité (%) : <input type="number" id="objDensite" value="55"></p>
-            <p>Moyenne max : <input type="number" id="objMoyenne" value="21"></p>
-        </div>
+<div class="main">
 
-        <div class="card">
-            <h2>🔗 Outils utiles</h2>
-            <p><a href="https://www.synonymo.fr/" target="_blank">Synonymes</a></p>
-            <p><a href="https://www.scribens.fr/" target="_blank">Orthographe</a></p>
-        </div>
+<div class="top-row">
 
-    </div>
+<div class="card text-block">
 
-    <!-- MAIN -->
-    <div class="main">
+<!-- LIGNE ÉLÈVE -->
+<div class="ligne-eleve">
+👤 <input id="nom" placeholder="Nom">
+</div>
 
-        <div class="top-row">
+<!-- LIGNE TITRE + DATE -->
+<div class="ligne-texte">
+📝 <input id="titre" placeholder="Titre">
+📅 <span id="date"></span>
+<button id="btnAction" onclick="actionTexte()">💾 Ajouter</button>
+</div>
 
-            <div class="card text-block">
+<textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
 
-                <!-- BARRE ÉLÈVE -->
-                <div class="ligne-eleve">
-                    <strong>👤 Élève :</strong>
-                    <input id="nom" placeholder="Nom">
-                    <button onclick="sauvegarder()">💾 Sauvegarder</button>
-                    <button onclick="charger()">📂 Charger</button>
-                </div>
-
-                <textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
-
-            </div>
-
-            <div class="card stats-block">
-                <h2>📊 Statistiques</h2>
-
-                <p>Mots : <span id="mots">0</span> <span id="motsCouleur">🔴</span></p>
-                <p>Moyenne mots / phrase : <span id="moyenne">0</span> <span id="moyenneCouleur">🔴</span></p>
-                <p>Densité lexicale : <span id="densite">0</span> % <span id="densiteCouleur">🔴</span></p>
-                <p>Paragraphes : <span id="paragraphes">0</span></p>
-                <p>Phrases : <span id="phrases">0</span></p>
-                <p>Phrase la plus longue : <span id="longue">0</span></p>
-                <p>Verbes ternes : <span id="verbes">0</span></p>
-                <p>Répétitions : <span id="repetitions">0</span></p>
-            </div>
-
-        </div>
-
-        <div class="card">
-            <h2>🔍 Texte analysé</h2>
-
-            <div class="legend">
-                <span class="rep">Répétitions</span>
-                <span class="verbe">Verbes ternes</span>
-            </div>
-
-            <div id="texteColorie"></div>
-        </div>
-
-    </div>
+<div id="listeTextes"></div>
 
 </div>
 
-<footer>
-    © Redac Lab – Pierre Lemétayer – 2026
-</footer>
+<div class="card stats-block">
+<p>Mots : <span id="mots">0</span></p>
+</div>
+
+</div>
+
+<div class="card">
+<h2>Texte analysé</h2>
+<div id="texteColorie"></div>
+</div>
+
+</div>
+
+</div>
+
+<footer>© Redac Lab – Pierre Lemétayer – 2026</footer>
 
 <script>
+
+let indexCourant = null;
+
 const textarea = document.getElementById("texte");
 
+function afficherDate(){
+let d = new Date();
+document.getElementById("date").textContent = d.toLocaleDateString();
+}
+afficherDate();
+
 textarea.addEventListener("input", analyser);
-document.querySelectorAll("input").forEach(input => {
-    input.addEventListener("input", analyser);
+document.getElementById("nom").addEventListener("input", afficherTextes);
+
+function analyser(){
+let texte = textarea.value;
+let mots = texte.trim().split(/\s+/).filter(m=>m);
+document.getElementById("mots").textContent = mots.length;
+document.getElementById("texteColorie").innerText = texte;
+}
+
+function actionTexte(){
+if(indexCourant === null){
+ajouterTexte();
+}else{
+modifierTexte();
+}
+}
+
+function ajouterTexte(){
+let nom = document.getElementById("nom").value;
+let texte = document.getElementById("texte").value;
+let titre = document.getElementById("titre").value || "Sans titre";
+let date = document.getElementById("date").textContent;
+
+if(nom===""){ alert("Entre ton nom"); return; }
+
+let cle = "redac_" + nom;
+let anciens = JSON.parse(localStorage.getItem(cle)) || [];
+
+anciens.push({titre, date, contenu:texte});
+
+localStorage.setItem(cle, JSON.stringify(anciens));
+
+resetForm();
+afficherTextes();
+alert("Texte ajouté !");
+}
+
+function modifierTexte(){
+let nom = document.getElementById("nom").value;
+let cle = "redac_" + nom;
+
+let textes = JSON.parse(localStorage.getItem(cle)) || [];
+
+textes[indexCourant] = {
+titre: document.getElementById("titre").value,
+date: document.getElementById("date").textContent,
+contenu: document.getElementById("texte").value
+};
+
+localStorage.setItem(cle, JSON.stringify(textes));
+
+resetForm();
+afficherTextes();
+alert("Texte modifié !");
+}
+
+function afficherTextes(){
+let nom = document.getElementById("nom").value;
+let cle = "redac_" + nom;
+
+let textes = JSON.parse(localStorage.getItem(cle)) || [];
+
+let html = "<h3>📚 Mes textes</h3>";
+
+textes.forEach((t, i) => {
+html += `<p><button onclick="chargerTexte(${i})">${t.titre} (${t.date})</button></p>`;
 });
 
-function analyser() {
-    const texteOriginal = textarea.value;
-    const texte = texteOriginal.toLowerCase();
-
-    const mots = texte.trim().split(/\s+/).filter(m => m.length > 0);
-    const nbMots = mots.length;
-
-    const phrases = texte.split(/[.!?]+/).filter(p => p.trim().length > 0);
-    const nbPhrases = phrases.length;
-
-    const moyenne = nbPhrases > 0 ? (nbMots / nbPhrases) : 0;
-
-    const motsUniques = new Set(mots);
-    const densite = nbMots > 0 ? ((motsUniques.size / nbMots) * 100) : 0;
-
-    let maxLongueur = 0;
-    phrases.forEach(p => {
-        const l = p.trim().split(/\s+/).filter(m => m).length;
-        if (l > maxLongueur) maxLongueur = l;
-    });
-
-    const nbParagraphes = texte.split(/\n+/).filter(p => p.trim()).length;
-
-    const verbes = ["suis","es","est","sommes","etes","sont","étais","était","étions","étiez","étaient","serai","seras","sera","serons","serez","seront","fus","fut","fûmes","fûtes","furent",
-                    "ai","as","a","avons","avez","ont","avais","avait","avions","aviez","avaient","aurai","auras","aura","aurons","aurez","auront","eus","eut","eûmes","eûtes","eurent",
-                    "fais","fait","faisons","faites","font","faisais","faisait","faisions","faisiez","faisaient","ferai","feras","fera","ferons","ferez","feront","fis","fit","fîmes","fîtes","firent",
-                    "dis","dit","disons","dites","disent","disais","disait","disions","disiez","disaient","dirai","diras","dira","dirons","direz","diront","dîmes","dîtes","dirent"];
-
-    let nbVerbes = 0, motsVerbes = [];
-    mots.forEach(m => { if (verbes.includes(m)) { nbVerbes++; motsVerbes.push(m);} });
-
-    const compteur = {};
-    mots.forEach(m => { if (m.length > 3) compteur[m] = (compteur[m]||0)+1; });
-
-    let nbRep = 0, motsRep = [];
-    for (let m in compteur) if (compteur[m]>1){ nbRep++; motsRep.push(m); }
-
-    let html = textarea.value;
-
-    motsRep.forEach(m => {
-        html = html.replace(new RegExp("\\b"+m+"\\b","gi"), '<span class="rep">'+m+'</span>');
-    });
-
-    motsVerbes.forEach(m => {
-        html = html.replace(new RegExp("\\b"+m+"\\b","gi"), '<span class="verbe">'+m+'</span>');
-    });
-
-    document.getElementById("texteColorie").innerHTML = html;
-
-    function c(v,o,t="min"){return t=="min"?(v>=o?"🟢":v>=o*0.8?"🟠":"🔴"):(v<=o?"🟢":v<=o*1.2?"🟠":"🔴");}
-
-    document.getElementById("mots").textContent = nbMots;
-    document.getElementById("phrases").textContent = nbPhrases;
-    document.getElementById("moyenne").textContent = moyenne.toFixed(1);
-    document.getElementById("densite").textContent = densite.toFixed(1);
-    document.getElementById("longue").textContent = maxLongueur;
-    document.getElementById("paragraphes").textContent = nbParagraphes;
-    document.getElementById("verbes").textContent = nbVerbes;
-    document.getElementById("repetitions").textContent = nbRep;
-
-    document.getElementById("motsCouleur").textContent = c(nbMots,objMots.value,"min");
-    document.getElementById("densiteCouleur").textContent = c(densite,objDensite.value,"min");
-    document.getElementById("moyenneCouleur").textContent = c(moyenne,objMoyenne.value,"max");
+document.getElementById("listeTextes").innerHTML = html;
 }
 
-function sauvegarder(){
-    let nom=document.getElementById("nom").value;
-    let texte=document.getElementById("texte").value;
+function chargerTexte(index){
+let nom = document.getElementById("nom").value;
+let cle = "redac_" + nom;
 
-    if(nom===""){alert("Entre ton nom"); return;}
+let textes = JSON.parse(localStorage.getItem(cle)) || [];
+let t = textes[index];
 
-    localStorage.setItem("redac_"+nom, texte);
-    alert("Texte sauvegardé !");
+document.getElementById("texte").value = t.contenu;
+document.getElementById("titre").value = t.titre;
+
+indexCourant = index;
+document.getElementById("btnAction").textContent = "✏️ Modifier";
+
+analyser();
 }
 
-function charger(){
-    let nom=document.getElementById("nom").value;
-    let texte=localStorage.getItem("redac_"+nom);
-
-    if(texte){
-        document.getElementById("texte").value=texte;
-        analyser();
-    }else{
-        alert("Aucun texte trouvé");
-    }
+function resetForm(){
+indexCourant = null;
+document.getElementById("texte").value = "";
+document.getElementById("titre").value = "";
+document.getElementById("btnAction").textContent = "💾 Ajouter";
+afficherDate();
 }
+
 </script>
 
 </body>
