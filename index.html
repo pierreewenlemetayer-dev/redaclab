@@ -51,6 +51,16 @@
             margin-left: 10px;
         }
 
+        a {
+            text-decoration: none;
+            color: #1971c2;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         .rep {
             background-color: #ffe066;
             font-weight: bold;
@@ -94,12 +104,21 @@
 <div class="layout">
 
     <div class="sidebar">
+
         <div class="card">
             <h2>🎯 Objectifs</h2>
             <p>Mots min : <input type="number" id="objMots" value="300"></p>
             <p>Densité (%) : <input type="number" id="objDensite" value="55"></p>
             <p>Moyenne max : <input type="number" id="objMoyenne" value="21"></p>
         </div>
+
+        <!-- 🔗 NOUVEAU BLOC -->
+        <div class="card">
+            <h2>🔗 Outils utiles</h2>
+            <p><a href="https://www.synonymo.fr/" target="_blank">Synonymes</a></p>
+            <p><a href="https://www.scribens.fr/" target="_blank">Orthographe</a></p>
+        </div>
+
     </div>
 
     <div class="main">
