@@ -1,60 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Redac Lab</title>
+    <title>Redac Lab</title>
 
-<style>
-body {font-family: Arial; background:#f4f6f8; padding:20px;}
-.layout {display:flex; gap:20px;}
-.sidebar {width:250px;}
-.main {flex:1;}
-.top-row {display:flex; gap:20px;}
-.card {background:white; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-bottom:20px;}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
 
-.text-block {flex:2; display:flex; flex-direction:column;}
-.stats-block {flex:1;}
+        h1 {
+            text-align: center;
+        }
 
-textarea {
-width:100%;
-min-height:320px;
-font-family: Verdana;
-font-size:16px;
-padding:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
+        .layout {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
 
-.ligne-eleve, .ligne-texte {
-display:flex;
-gap:10px;
-align-items:center;
-flex-wrap:wrap;
-margin-bottom:10px;
-}
+        .sidebar {
+            width: 250px;
+        }
 
-input {padding:5px;}
+        .main {
+            flex: 1;
+        }
 
-button {
-padding:5px 10px;
-border:none;
-border-radius:6px;
-background:#1971c2;
-color:white;
-cursor:pointer;
-}
+        .top-row {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
 
-button:hover {background:#125a9c;}
+        .text-block {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+        }
 
-#texteColorie {
-border:1px solid #ccc;
-padding:10px;
-background:#fafafa;
-min-height:300px;
-white-space:pre-wrap;
-}
+        .stats-block {
+            flex: 1;
+        }
 
-footer {text-align:center; margin-top:30px; color:#666;}
-</style>
+        .card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 320px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: Verdana, sans-serif;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        input {
+            margin-left: 10px;
+        }
+
+        .ligne-eleve {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: none;
+            background-color: #1971c2;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #125a9c;
+        }
+
+        .rep { background-color: #ffe066; }
+        .verbe { background-color: #74c0fc; }
+
+        #texteColorie {
+            white-space: pre-wrap;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fafafa;
+            min-height: 300px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
@@ -63,49 +114,49 @@ footer {text-align:center; margin-top:30px; color:#666;}
 
 <div class="layout">
 
-<div class="sidebar">
-<div class="card">
-<h2>🎯 Objectifs</h2>
-<p>Mots min : <input type="number" id="objMots" value="300"></p>
-</div>
-</div>
+    <div class="sidebar">
 
-<div class="main">
+        <div class="card">
+            <h2>🎯 Objectifs</h2>
+            <p>Mots min : <input type="number" id="objMots" value="300"></p>
+            <p>Densité (%) : <input type="number" id="objDensite" value="55"></p>
+            <p>Moyenne max : <input type="number" id="objMoyenne" value="21"></p>
+        </div>
 
-<div class="top-row">
+    </div>
 
-<div class="card text-block">
+    <div class="main">
 
-<!-- LIGNE ÉLÈVE -->
-<div class="ligne-eleve">
-👤 <input id="nom" placeholder="Nom">
-</div>
+        <div class="top-row">
 
-<!-- LIGNE TITRE + DATE -->
-<div class="ligne-texte">
-📝 <input id="titre" placeholder="Titre">
-📅 <span id="date"></span>
-<button onclick="ajouterTexte()">💾 Ajouter</button>
-</div>
+            <div class="card text-block">
 
-<textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
+                <!-- BARRE ÉLÈVE -->
+                <div class="ligne-eleve">
+                    👤 <input id="nom" placeholder="Nom">
+                    <button onclick="ajouterTexte()">💾 Ajouter</button>
+                </div>
 
-<div id="listeTextes"></div>
+                <textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
 
-</div>
+                <!-- LISTE DES TEXTES -->
+                <div id="listeTextes"></div>
 
-<div class="card stats-block">
-<p>Mots : <span id="mots">0</span></p>
-</div>
+            </div>
 
-</div>
+            <div class="card stats-block">
+                <h2>📊</h2>
+                <p>Mots : <span id="mots">0</span></p>
+            </div>
 
-<div class="card">
-<h2>Texte analysé</h2>
-<div id="texteColorie"></div>
-</div>
+        </div>
 
-</div>
+        <div class="card">
+            <h2>Texte analysé</h2>
+            <div id="texteColorie"></div>
+        </div>
+
+    </div>
 
 </div>
 
@@ -115,71 +166,57 @@ footer {text-align:center; margin-top:30px; color:#666;}
 
 const textarea = document.getElementById("texte");
 
-// afficher date du jour
-function afficherDate(){
-let d = new Date();
-let date = d.toLocaleDateString();
-document.getElementById("date").textContent = date;
-}
-
-afficherDate();
-
 textarea.addEventListener("input", analyser);
 document.getElementById("nom").addEventListener("input", afficherTextes);
 
 function analyser(){
-let texte = textarea.value;
-let mots = texte.trim().split(/\s+/).filter(m=>m);
-document.getElementById("mots").textContent = mots.length;
-document.getElementById("texteColorie").innerText = texte;
+    let texte = textarea.value;
+    let mots = texte.trim().split(/\s+/).filter(m => m);
+
+    document.getElementById("mots").textContent = mots.length;
+    document.getElementById("texteColorie").innerText = texte;
 }
 
 function ajouterTexte(){
-let nom = document.getElementById("nom").value;
-let texte = document.getElementById("texte").value;
-let titre = document.getElementById("titre").value || "Sans titre";
-let date = document.getElementById("date").textContent;
+    let nom = document.getElementById("nom").value;
+    let texte = document.getElementById("texte").value;
 
-if(nom===""){ alert("Entre ton nom"); return; }
+    if(nom===""){ alert("Entre ton nom"); return; }
 
-let cle = "redac_" + nom;
-let anciens = JSON.parse(localStorage.getItem(cle)) || [];
+    let cle = "redac_" + nom;
+    let anciens = JSON.parse(localStorage.getItem(cle)) || [];
 
-anciens.push({titre:titre, date:date, contenu:texte});
+    anciens.push(texte);
 
-localStorage.setItem(cle, JSON.stringify(anciens));
+    localStorage.setItem(cle, JSON.stringify(anciens));
 
-afficherTextes();
-alert("Texte ajouté !");
+    afficherTextes();
+    alert("Texte ajouté !");
 }
 
 function afficherTextes(){
-let nom = document.getElementById("nom").value;
-let cle = "redac_" + nom;
+    let nom = document.getElementById("nom").value;
+    let cle = "redac_" + nom;
 
-let textes = JSON.parse(localStorage.getItem(cle)) || [];
+    let textes = JSON.parse(localStorage.getItem(cle)) || [];
 
-let html = "<h3>📚 Mes textes</h3>";
+    let html = "<h3>📚 Mes textes</h3>";
 
-textes.forEach((t, i) => {
-html += `<p><button onclick="chargerTexte(${i})">${t.titre} (${t.date})</button></p>`;
-});
+    textes.forEach((t, i) => {
+        html += `<p><button onclick="chargerTexte(${i})">Texte ${i+1}</button></p>`;
+    });
 
-document.getElementById("listeTextes").innerHTML = html;
+    document.getElementById("listeTextes").innerHTML = html;
 }
 
 function chargerTexte(index){
-let nom = document.getElementById("nom").value;
-let cle = "redac_" + nom;
+    let nom = document.getElementById("nom").value;
+    let cle = "redac_" + nom;
 
-let textes = JSON.parse(localStorage.getItem(cle)) || [];
+    let textes = JSON.parse(localStorage.getItem(cle)) || [];
 
-let t = textes[index];
-
-document.getElementById("texte").value = t.contenu;
-document.getElementById("titre").value = t.titre;
-
-analyser();
+    document.getElementById("texte").value = textes[index];
+    analyser();
 }
 
 </script>
