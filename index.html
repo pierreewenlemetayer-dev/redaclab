@@ -85,7 +85,7 @@ footer {text-align:center; margin-top:30px; color:#666;}
 <div class="ligne-texte">
 📝 <input id="titre" placeholder="Titre">
 📅 <span id="date"></span>
-<button id="btnAction" onclick="actionTexte()">💾 Ajouter</button>
+<button onclick="ajouterTexte()">💾 Ajouter</button>
 </div>
 
 <textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
@@ -113,14 +113,15 @@ footer {text-align:center; margin-top:30px; color:#666;}
 
 <script>
 
-let indexCourant = null;
-
 const textarea = document.getElementById("texte");
 
+// afficher date du jour
 function afficherDate(){
 let d = new Date();
-document.getElementById("date").textContent = d.toLocaleDateString();
+let date = d.toLocaleDateString();
+document.getElementById("date").textContent = date;
 }
+
 afficherDate();
 
 textarea.addEventListener("input", analyser);
@@ -131,14 +132,6 @@ let texte = textarea.value;
 let mots = texte.trim().split(/\s+/).filter(m=>m);
 document.getElementById("mots").textContent = mots.length;
 document.getElementById("texteColorie").innerText = texte;
-}
-
-function actionTexte(){
-if(indexCourant === null){
-ajouterTexte();
-}else{
-modifierTexte();
-}
 }
 
 function ajouterTexte(){
@@ -152,32 +145,12 @@ if(nom===""){ alert("Entre ton nom"); return; }
 let cle = "redac_" + nom;
 let anciens = JSON.parse(localStorage.getItem(cle)) || [];
 
-anciens.push({titre, date, contenu:texte});
+anciens.push({titre:titre, date:date, contenu:texte});
 
 localStorage.setItem(cle, JSON.stringify(anciens));
 
-resetForm();
 afficherTextes();
 alert("Texte ajouté !");
-}
-
-function modifierTexte(){
-let nom = document.getElementById("nom").value;
-let cle = "redac_" + nom;
-
-let textes = JSON.parse(localStorage.getItem(cle)) || [];
-
-textes[indexCourant] = {
-titre: document.getElementById("titre").value,
-date: document.getElementById("date").textContent,
-contenu: document.getElementById("texte").value
-};
-
-localStorage.setItem(cle, JSON.stringify(textes));
-
-resetForm();
-afficherTextes();
-alert("Texte modifié !");
 }
 
 function afficherTextes(){
@@ -200,23 +173,13 @@ let nom = document.getElementById("nom").value;
 let cle = "redac_" + nom;
 
 let textes = JSON.parse(localStorage.getItem(cle)) || [];
+
 let t = textes[index];
 
 document.getElementById("texte").value = t.contenu;
 document.getElementById("titre").value = t.titre;
 
-indexCourant = index;
-document.getElementById("btnAction").textContent = "✏️ Modifier";
-
 analyser();
-}
-
-function resetForm(){
-indexCourant = null;
-document.getElementById("texte").value = "";
-document.getElementById("titre").value = "";
-document.getElementById("btnAction").textContent = "💾 Ajouter";
-afficherDate();
 }
 
 </script>
