@@ -5,11 +5,11 @@
 
     <style>
 
-:root{--fond:#f7f3ec;--papier:#fffdf9;--texte:#292722;--secondaire:#756f66;--accent:#c96f42;--accent-fonce:#a9542f;--accent-pale:#f2dfd2;--bordure:#ddd5ca;--ombre:0 8px 25px rgba(60,45,30,.08)}
+:root{--fond:#f1f7fb;--papier:#fcfeff;--texte:#24313a;--secondaire:#667985;--accent:#6b9fbd;--accent-fonce:#477f9f;--accent-pale:#dcecf5;--bordure:#d1e0e8;--ombre:0 8px 25px rgba(45,75,95,.08)}
 *{box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--fond);color:var(--texte);margin:0;padding:0 20px 35px;line-height:1.5}
 h1{text-align:center;margin:0;padding:42px 20px 28px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.8rem,7vw,4.8rem);font-weight:700;letter-spacing:-.04em;line-height:1}
-h2{font-family:Georgia,"Times New Roman",serif;margin:0 0 18px}
+h2{font-family:Georgia,"Times New Roman",serif;margin:0 0 18px}.sous-titre{text-align:center;margin:-14px 0 28px;color:var(--secondaire);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.1rem,2.5vw,1.4rem);font-style:italic}
 .layout{width:min(1200px,100%);margin:0 auto;display:flex;gap:20px;align-items:flex-start}
 .sidebar{width:245px;flex:0 0 245px}.main{flex:1;min-width:0}
 .top-row{display:flex;gap:20px;align-items:stretch}.text-block{flex:2;display:flex;flex-direction:column}.stats-block{flex:1;min-width:245px}
@@ -22,10 +22,10 @@ button{padding:9px 13px;border-radius:9px;border:1px solid var(--accent);backgro
 button:hover{background:var(--accent-fonce);border-color:var(--accent-fonce)}
 a{color:var(--accent-fonce);text-decoration:none;font-weight:600}a:hover{text-decoration:underline}
 .stats-block p{margin:10px 0;color:var(--secondaire)}.stats-block p span:not([id$="Couleur"]){color:var(--texte);font-weight:600}
-.rep{background:#f1d88a;font-weight:bold;border-radius:3px}.verbe{background:#d8c4e8;font-weight:bold;border-radius:3px}
+.rep{background:#cfe7f2;font-weight:bold;border-radius:3px}.verbe{background:#b9d3e2;font-weight:bold;border-radius:3px}
 #texteColorie{white-space:pre-wrap;border:1px solid var(--bordure);padding:18px;border-radius:12px;background:#fff;min-height:300px;font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.6;width:100%}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.legend span{display:inline-block;padding:5px 10px;border-radius:999px;font-size:.8rem}
-.legend .rep{background:#f1d88a}.legend .verbe{background:#d8c4e8}
+.legend .rep{background:#cfe7f2}.legend .verbe{background:#b9d3e2}
 footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8rem;color:var(--secondaire)}
 @media(max-width:900px){.layout,.top-row{flex-direction:column}.sidebar,.stats-block{width:100%;flex:none;min-width:0}}
 @media(max-width:600px){body{padding:0 12px 25px}h1{padding-top:30px}.card{padding:17px;border-radius:15px}.ligne-eleve{align-items:flex-start}.ligne-eleve button{width:100%}textarea{min-height:280px}}
@@ -37,6 +37,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
 <body>
 
 <h1>Redac Lab</h1>
+<p class="sous-titre">Outil d’écriture</p>
 
 <div class="layout">
 
@@ -45,7 +46,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
 
         <div class="card">
             <h2>🎯 Objectifs</h2>
-            <p>Mots min : <input type="number" id="objMots" value="300"></p>
+            <p>Nombre de mots min : <input type="number" id="objMots" value="300"></p>
             <p>Moyenne max : <input type="number" id="objMoyenne" value="21"></p>
             <p>Densité (%) : <input type="number" id="objDensite" value="55"></p>
         </div>
