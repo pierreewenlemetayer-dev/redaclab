@@ -23,9 +23,9 @@ button:hover{background:var(--accent-fonce);border-color:var(--accent-fonce)}
 a{color:var(--accent-fonce);text-decoration:none;font-weight:600}a:hover{text-decoration:underline}
 .stats-block p{margin:10px 0;color:var(--secondaire)}.stats-block p span:not([id$="Couleur"]){color:var(--texte);font-weight:600}
 .rep{background:#f3e6a8;font-weight:bold;border-radius:3px}.verbe{background:#b9d3e2;font-weight:bold;border-radius:3px}
-#texteColorie{white-space:pre-wrap;border:1px solid var(--bordure);padding:18px;border-radius:12px;background:#fff;min-height:300px;font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.6;width:100%}
+.phrase-longue{text-decoration:underline}#texteColorie{white-space:pre-wrap;border:1px solid var(--bordure);padding:18px;border-radius:12px;background:#fff;min-height:300px;font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.6;width:100%}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.legend span{display:inline-block;padding:5px 10px;border-radius:999px;font-size:.8rem}
-.legend .rep{background:#f3e6a8}.legend .verbe{background:#b9d3e2}.legend .longue{font-style:italic}
+.legend .rep{background:#f3e6a8}.legend .verbe{background:#b9d3e2}.legend .longue{text-decoration:underline}
 footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8rem;color:var(--secondaire)}
 @media(max-width:900px){.layout,.top-row{flex-direction:column}.sidebar,.stats-block{width:100%;flex:none;min-width:0}}
 @media(max-width:600px){body{padding:0 12px 25px}h1{padding-top:30px}.card{padding:17px;border-radius:15px}.ligne-eleve{align-items:flex-start}.ligne-eleve button{width:100%}textarea{min-height:280px}}
@@ -173,7 +173,7 @@ function analyser() {
     });
 
     if (phraseLaPlusLongue) {
-        html = html.replace(phraseLaPlusLongue, "<em>" + phraseLaPlusLongue + "</em>");
+        html = html.replace(phraseLaPlusLongue, "<span class=\"phrase-longue\">" + phraseLaPlusLongue + "</span>");
     }
 
     motsRep.forEach(m => {
