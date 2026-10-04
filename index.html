@@ -25,7 +25,7 @@ a{color:var(--accent-fonce);text-decoration:none;font-weight:600}a:hover{text-de
 .rep{background:#f3e6a8;font-weight:bold;border-radius:3px}.verbe{background:#b9d3e2;font-weight:bold;border-radius:3px}
 #texteColorie{white-space:pre-wrap;border:1px solid var(--bordure);padding:18px;border-radius:12px;background:#fff;min-height:300px;font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.6;width:100%}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.legend span{display:inline-block;padding:5px 10px;border-radius:999px;font-size:.8rem}
-.legend .rep{background:#f3e6a8}.legend .verbe{background:#b9d3e2}
+.legend .rep{background:#f3e6a8}.legend .verbe{background:#b9d3e2}.legend .longue{font-style:italic}
 footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8rem;color:var(--secondaire)}
 @media(max-width:900px){.layout,.top-row{flex-direction:column}.sidebar,.stats-block{width:100%;flex:none;min-width:0}}
 @media(max-width:600px){body{padding:0 12px 25px}h1{padding-top:30px}.card{padding:17px;border-radius:15px}.ligne-eleve{align-items:flex-start}.ligne-eleve button{width:100%}textarea{min-height:280px}}
@@ -100,6 +100,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
             <div class="legend">
                 <span class="rep">Répétitions</span>
                 <span class="verbe">Verbes ternes</span>
+                <span class="longue">Phrase la plus longue</span>
             </div>
 
             <div id="texteColorie"></div>
@@ -159,6 +160,21 @@ function analyser() {
     for (let m in compteur) if (compteur[m]>1){ nbRep++; motsRep.push(m); }
 
     let html = textarea.value;
+
+    const phrasesOriginales = textarea.value.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+    let phraseLaPlusLongue = "";
+    let longueurMax = 0;
+    phrasesOriginales.forEach(p => {
+        const longueur = p.trim().split(/\s+/).filter(m => m).length;
+        if (longueur > longueurMax) {
+            longueurMax = longueur;
+            phraseLaPlusLongue = p;
+        }
+    });
+
+    if (phraseLaPlusLongue) {
+        html = html.replace(phraseLaPlusLongue, "<em>" + phraseLaPlusLongue + "</em>");
+    }
 
     motsRep.forEach(m => {
         html = html.replace(new RegExp("\\b"+m+"\\b","gi"), '<span class="rep">'+m+'</span>');
