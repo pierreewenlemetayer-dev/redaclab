@@ -49,11 +49,11 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
   .text-block::before{content:"Élève : " attr(data-eleve);display:block;font-size:11pt;margin-bottom:5mm}
   textarea{display:none}
   .text-print{display:block!important;white-space:pre-wrap;font-family:Verdana,Arial,sans-serif;font-size:10.5pt;line-height:1.2;color:#000}
-  .stats-block{display:block;width:100%;min-width:0;padding:0;margin:0;border:0;box-shadow:none;background:#fff}
+  .stats-block{display:none!important}
   .stats-block h2{font-size:15pt;margin:0 0 3mm}
   .objectifs-print{display:block!important;margin:0 0 5mm}
-  .objectifs-print table{width:100%;border-collapse:collapse;font-size:10pt}
-  .objectifs-print th,.objectifs-print td{border:1px solid #bbb;padding:2mm;text-align:left}
+  .objectifs-print table{width:100%;border:1px solid #bbb;border-collapse:separate;border-spacing:0;font-size:10pt}
+  .objectifs-print th,.objectifs-print td{border:0;padding:2mm;text-align:left}
   .objectifs-print th:not(:first-child),.objectifs-print td:not(:first-child){text-align:center}
   .statistiques-print{display:block!important}
   .statistiques-print p{margin:3mm 0;font-size:10pt;color:#000}
@@ -181,11 +181,7 @@ function preparerImpression() {
       <tr><td>Moyenne de mots / phrase</td><td>≤ ${document.getElementById("objMoyenne").value}</td><td>${document.getElementById("moyenne").textContent} ${document.getElementById("moyenneCouleur").textContent}</td></tr>
       <tr><td>Densité lexicale</td><td>≥ ${document.getElementById("objDensite").value} %</td><td>${document.getElementById("densite").textContent} % ${document.getElementById("densiteCouleur").textContent}</td></tr></table>`;
     document.getElementById("statistiquesPrint").innerHTML = `
-      <p><strong>Mes statistiques :</strong> Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span>
-      <p>Phrases : <span>${document.getElementById("phrases").textContent}</span></p>
-      <p>Phrase la plus longue : <span>${document.getElementById("longue").textContent}</span></p>
-      <p>Verbes ternes : <span>${document.getElementById("verbes").textContent}</span></p>
-      <p>Répétitions : <span>${document.getElementById("repetitions").textContent}</span></p>`;
+      <p><strong>Mes statistiques :</strong> Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span> ; Phrases : <span>${document.getElementById("phrases").textContent}</span> ; Phrase la plus longue : <span>${document.getElementById("longue").textContent}</span> ; Verbes ternes : <span>${document.getElementById("verbes").textContent}</span> ; Répétitions : <span>${document.getElementById("repetitions").textContent}</span></p>`;
 }
 
 window.addEventListener("beforeprint", preparerImpression);
