@@ -29,6 +29,8 @@ a{color:var(--accent-fonce);text-decoration:none;font-weight:600}a:hover{text-de
 .redaclab{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 24px;position:relative;left:-132px}
 .redaclab a{display:inline-block;border:1px solid var(--bordure);border-radius:10px;padding:10px 16px;background:transparent;color:var(--accent-fonce);text-decoration:none;transition:.18s ease}
 .redaclab a:hover{background:var(--accent-pale);border-color:var(--accent)}
+.pdf-button{display:block;margin:0 auto 18px;padding:10px 16px;border-radius:10px;border:1px solid var(--accent-fonce);background:var(--accent-fonce);color:#fff;font:inherit;cursor:pointer;transition:.18s ease}
+.pdf-button:hover{background:var(--accent);border-color:var(--accent)}
 footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8rem;color:var(--secondaire)}
 @media(max-width:900px){.layout,.top-row{flex-direction:column}.sidebar,.stats-block{width:100%;flex:none;min-width:0}.redaclab{left:0}}
 @media(max-width:600px){body{padding:0 12px 25px}h1{padding-top:30px}.card{padding:17px;border-radius:15px}.ligne-eleve{align-items:flex-start}.ligne-eleve button{width:100%}textarea{min-height:280px}}
@@ -137,6 +139,8 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
 
             <div id="texteColorie"></div>
         </div>
+
+        <button class="pdf-button" onclick="window.print()">📄 Imprimer / enregistrer en PDF</button>
 
         <div class="redaclab">
             <a href="https://pierreewenlemetayer-dev.github.io/lans/" target="_blank" rel="noopener">
