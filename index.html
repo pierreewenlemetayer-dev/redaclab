@@ -41,7 +41,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
   body{background:#fff;padding:0;color:#000;font-family:Verdana,Arial,sans-serif;line-height:1.2}
   h1{padding:0 0 2mm;font-size:24pt}
   .sous-titre{margin:0 0 5mm;font-size:11pt}
-  .sidebar,.ligne-eleve,.redaclab,.card:has(#texteColorie),footer{display:none!important}
+  .sidebar,.ligne-eleve,.redaclab,.pdf-button,.card:has(#texteColorie),footer{display:none!important}
   .layout{width:100%;display:block;margin:0}
   .main{width:100%}
   .top-row{display:block}
@@ -181,7 +181,7 @@ function preparerImpression() {
       <tr><td>Moyenne de mots / phrase</td><td>≤ ${document.getElementById("objMoyenne").value}</td><td>${document.getElementById("moyenne").textContent} ${document.getElementById("moyenneCouleur").textContent}</td></tr>
       <tr><td>Densité lexicale</td><td>≥ ${document.getElementById("objDensite").value} %</td><td>${document.getElementById("densite").textContent} % ${document.getElementById("densiteCouleur").textContent}</td></tr></table>`;
     document.getElementById("statistiquesPrint").innerHTML = `
-      <p><strong>Mes statistiques :</strong> Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span> ; Phrases : <span>${document.getElementById("phrases").textContent}</span> ; Phrase la plus longue : <span>${document.getElementById("longue").textContent}</span> ; Verbes ternes : <span>${document.getElementById("verbes").textContent}</span> ; Répétitions : <span>${document.getElementById("repetitions").textContent}</span></p>`;
+      <p><strong>Mes statistiques :</strong><br>Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span> ; Phrases : <span>${document.getElementById("phrases").textContent}</span> ; Phrase la plus longue : <span>${document.getElementById("longue").textContent}</span> ; Verbes ternes : <span>${document.getElementById("verbes").textContent}</span> ; Répétitions : <span>${document.getElementById("repetitions").textContent}</span></p>`;
 }
 
 window.addEventListener("beforeprint", preparerImpression);
