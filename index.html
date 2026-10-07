@@ -33,6 +33,35 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
 @media(max-width:900px){.layout,.top-row{flex-direction:column}.sidebar,.stats-block{width:100%;flex:none;min-width:0}.redaclab{left:0}}
 @media(max-width:600px){body{padding:0 12px 25px}h1{padding-top:30px}.card{padding:17px;border-radius:15px}.ligne-eleve{align-items:flex-start}.ligne-eleve button{width:100%}textarea{min-height:280px}}
 
+    
+@media print{
+  @page{size:A4 portrait;margin:14mm 15mm 16mm}
+  body{background:#fff;padding:0;color:#000;font-family:Verdana,Arial,sans-serif;line-height:1.2}
+  h1{padding:0 0 2mm;font-size:24pt}
+  .sous-titre{margin:0 0 5mm;font-size:11pt}
+  .sidebar,.ligne-eleve,.redaclab,.card:has(#texteColorie),footer{display:none!important}
+  .layout{width:100%;display:block;margin:0}
+  .main{width:100%}
+  .top-row{display:block}
+  .text-block{display:block;width:100%;margin:0 0 6mm;padding:0;border:0;box-shadow:none;background:#fff}
+  .text-block::before{content:"Élève : " attr(data-eleve);display:block;font-size:11pt;margin-bottom:5mm}
+  textarea{display:none}
+  .text-print{display:block!important;white-space:pre-wrap;font-family:Verdana,Arial,sans-serif;font-size:10.5pt;line-height:1.2;color:#000}
+  .stats-block{display:block;width:100%;min-width:0;padding:0;margin:0;border:0;box-shadow:none;background:#fff}
+  .stats-block h2{font-size:15pt;margin:0 0 3mm}
+  .objectifs-print{display:block!important;margin:0 0 5mm}
+  .objectifs-print table{width:100%;border-collapse:collapse;font-size:10pt}
+  .objectifs-print th,.objectifs-print td{border:1px solid #bbb;padding:2mm;text-align:left}
+  .objectifs-print th:not(:first-child),.objectifs-print td:not(:first-child){text-align:center}
+  .statistiques-print{display:block!important}
+  .statistiques-print p{margin:2mm 0;font-size:10pt;color:#000}
+  .statistiques-print p span{color:#000;font-weight:600}
+  .print-footer{display:block!important;position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:8pt;color:#667985}
+}
+@media screen{
+  .text-print,.objectifs-print,.statistiques-print,.print-footer{display:none}
+}
+
     </style>
 
 </head>
@@ -67,7 +96,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
 
         <div class="top-row">
 
-            <div class="card text-block">
+            <div class="card text-block" id="printTextBlock">
 
                 <!-- BARRE ÉLÈVE -->
                 <div class="ligne-eleve">
@@ -78,6 +107,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
                 </div>
 
                 <textarea id="texte" placeholder="Écris ton texte ici..."></textarea>
+                <div class="text-print" id="textPrint"></div>
 
             </div>
 
@@ -121,6 +151,10 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
 
 </div>
 
+<div class="objectifs-print" id="objectifsPrint"></div>
+<div class="statistiques-print" id="statistiquesPrint"></div>
+<div class="print-footer">© Redac Lab – Pierre Lemétayer – 2026</div>
+
 <footer>
     © Redac Lab – Pierre Lemétayer – 2026
 </footer>
@@ -132,6 +166,26 @@ textarea.addEventListener("input", analyser);
 document.querySelectorAll("input").forEach(input => {
     input.addEventListener("input", analyser);
 });
+
+function preparerImpression() {
+    document.getElementById("textPrint").textContent = textarea.value;
+    document.getElementById("printTextBlock").setAttribute("data-eleve", document.getElementById("nom").value || "");
+    document.getElementById("objectifsPrint").innerHTML = `
+      <h2>Mes objectifs</h2>
+      <table><tr><th>Critère</th><th>Objectif</th><th>Valeur obtenue</th></tr>
+      <tr><td>Nombre de mots</td><td>≥ ${document.getElementById("objMots").value}</td><td>${document.getElementById("mots").textContent} ${document.getElementById("motsCouleur").textContent}</td></tr>
+      <tr><td>Moyenne de mots / phrase</td><td>≤ ${document.getElementById("objMoyenne").value}</td><td>${document.getElementById("moyenne").textContent} ${document.getElementById("moyenneCouleur").textContent}</td></tr>
+      <tr><td>Densité lexicale</td><td>≥ ${document.getElementById("objDensite").value} %</td><td>${document.getElementById("densite").textContent} % ${document.getElementById("densiteCouleur").textContent}</td></tr></table>`;
+    document.getElementById("statistiquesPrint").innerHTML = `
+      <h2>Mes statistiques</h2>
+      <p>Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span></p>
+      <p>Phrases : <span>${document.getElementById("phrases").textContent}</span></p>
+      <p>Phrase la plus longue : <span>${document.getElementById("longue").textContent}</span></p>
+      <p>Verbes ternes : <span>${document.getElementById("verbes").textContent}</span></p>
+      <p>Répétitions : <span>${document.getElementById("repetitions").textContent}</span></p>`;
+}
+
+window.addEventListener("beforeprint", preparerImpression);
 
 function analyser() {
     const texteOriginal = textarea.value;
