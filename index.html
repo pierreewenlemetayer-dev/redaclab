@@ -29,10 +29,10 @@ a{color:var(--accent-fonce);text-decoration:none;font-weight:600}a:hover{text-de
 .redaclab{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 24px;position:relative;left:-132px}
 .redaclab a{display:inline-block;border:1px solid var(--bordure);border-radius:10px;padding:10px 16px;background:transparent;color:var(--accent-fonce);text-decoration:none;transition:.18s ease}
 .redaclab a:hover{background:var(--accent-pale);border-color:var(--accent)}
-.pdf-button{display:block;margin:0 auto 18px;padding:10px 16px;border-radius:10px;border:1px solid var(--accent-fonce);background:var(--accent-fonce);color:#fff;font:inherit;cursor:pointer;transition:.18s ease}
+.pdf-button{display:block;margin:0 auto 18px;position:relative;left:-132px;padding:10px 16px;border-radius:10px;border:1px solid var(--accent-fonce);background:var(--accent-fonce);color:#fff;font:inherit;cursor:pointer;transition:.18s ease}
 .pdf-button:hover{background:var(--accent);border-color:var(--accent)}
 footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8rem;color:var(--secondaire)}
-@media(max-width:900px){.layout,.top-row{flex-direction:column}.sidebar,.stats-block{width:100%;flex:none;min-width:0}.redaclab{left:0}}
+@media(max-width:900px){.layout,.top-row{flex-direction:column}.sidebar,.stats-block{width:100%;flex:none;min-width:0}.redaclab,.pdf-button{left:0}}
 @media(max-width:600px){body{padding:0 12px 25px}h1{padding-top:30px}.card{padding:17px;border-radius:15px}.ligne-eleve{align-items:flex-start}.ligne-eleve button{width:100%}textarea{min-height:280px}}
 
     
@@ -56,8 +56,9 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
   .objectifs-print th,.objectifs-print td{border:1px solid #bbb;padding:2mm;text-align:left}
   .objectifs-print th:not(:first-child),.objectifs-print td:not(:first-child){text-align:center}
   .statistiques-print{display:block!important}
-  .statistiques-print p{margin:2mm 0;font-size:10pt;color:#000}
+  .statistiques-print p{margin:3mm 0;font-size:10pt;color:#000}
   .statistiques-print p span{color:#000;font-weight:600}
+  .statistiques-print strong{font-size:10pt;font-weight:700}
   .print-footer{display:block!important;position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:8pt;color:#667985}
 }
 @media screen{
@@ -175,14 +176,12 @@ function preparerImpression() {
     document.getElementById("textPrint").textContent = textarea.value;
     document.getElementById("printTextBlock").setAttribute("data-eleve", document.getElementById("nom").value || "");
     document.getElementById("objectifsPrint").innerHTML = `
-      <h2>Mes objectifs</h2>
-      <table><tr><th>Critère</th><th>Objectif</th><th>Valeur obtenue</th></tr>
+      <table><tr><th>Critères</th><th>Objectifs</th><th>Valeurs obtenues</th></tr>
       <tr><td>Nombre de mots</td><td>≥ ${document.getElementById("objMots").value}</td><td>${document.getElementById("mots").textContent} ${document.getElementById("motsCouleur").textContent}</td></tr>
       <tr><td>Moyenne de mots / phrase</td><td>≤ ${document.getElementById("objMoyenne").value}</td><td>${document.getElementById("moyenne").textContent} ${document.getElementById("moyenneCouleur").textContent}</td></tr>
       <tr><td>Densité lexicale</td><td>≥ ${document.getElementById("objDensite").value} %</td><td>${document.getElementById("densite").textContent} % ${document.getElementById("densiteCouleur").textContent}</td></tr></table>`;
     document.getElementById("statistiquesPrint").innerHTML = `
-      <h2>Mes statistiques</h2>
-      <p>Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span></p>
+      <p><strong>Mes statistiques :</strong> Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span>
       <p>Phrases : <span>${document.getElementById("phrases").textContent}</span></p>
       <p>Phrase la plus longue : <span>${document.getElementById("longue").textContent}</span></p>
       <p>Verbes ternes : <span>${document.getElementById("verbes").textContent}</span></p>
