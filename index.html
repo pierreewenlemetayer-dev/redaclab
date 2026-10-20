@@ -83,7 +83,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
             <h2>🎯 Objectifs</h2>
             <p>Nombre de mots min : <input type="number" id="objMots" value="300"></p>
             <p>Moyenne de mots max : <input type="number" id="objMoyenne" value="21"></p>
-            <p>Densité lexicale (%) : <input type="number" id="objDensite" value="55"></p>
+            <p>Diversité lexicale (%) : <input type="number" id="objDensite" value="55"></p>
         </div>
 
         <div class="card">
@@ -119,7 +119,7 @@ footer{width:min(1200px,100%);margin:10px auto 0;text-align:center;font-size:.8r
 
                 <p>Mots : <span id="mots">0</span> <span id="motsCouleur">🔴</span></p>
                 <p>Moyenne mots / phrase : <span id="moyenne">0</span> <span id="moyenneCouleur">🔴</span></p>
-                <p>Densité lexicale : <span id="densite">0</span> % <span id="densiteCouleur">🔴</span></p>
+                <p>Diversité lexicale : <span id="densite">0</span> % <span id="densiteCouleur">🔴</span></p>
                 <p>Paragraphes : <span id="paragraphes">0</span></p>
                 <p>Phrases : <span id="phrases">0</span></p>
                 <p>Phrase la plus longue : <span id="longue">0</span></p>
@@ -179,7 +179,7 @@ function preparerImpression() {
       <table><tr><th>Critères</th><th>Objectifs</th><th>Valeurs obtenues</th></tr>
       <tr><td>Nombre de mots</td><td>≥ ${document.getElementById("objMots").value}</td><td>${document.getElementById("mots").textContent} ${document.getElementById("motsCouleur").textContent}</td></tr>
       <tr><td>Moyenne de mots / phrase</td><td>≤ ${document.getElementById("objMoyenne").value}</td><td>${document.getElementById("moyenne").textContent} ${document.getElementById("moyenneCouleur").textContent}</td></tr>
-      <tr><td>Densité lexicale</td><td>≥ ${document.getElementById("objDensite").value} %</td><td>${document.getElementById("densite").textContent} % ${document.getElementById("densiteCouleur").textContent}</td></tr></table>`;
+      <tr><td>Diversité lexicale</td><td>≥ ${document.getElementById("objDensite").value} %</td><td>${document.getElementById("densite").textContent} % ${document.getElementById("densiteCouleur").textContent}</td></tr></table>`;
     document.getElementById("statistiquesPrint").innerHTML = `
       <p><strong>Mes statistiques :</strong><br>Paragraphes : <span>${document.getElementById("paragraphes").textContent}</span> ; Phrases : <span>${document.getElementById("phrases").textContent}</span> ; Phrase la plus longue : <span>${document.getElementById("longue").textContent}</span> ; Verbes ternes : <span>${document.getElementById("verbes").textContent}</span> ; Répétitions : <span>${document.getElementById("repetitions").textContent}</span></p>`;
 }
